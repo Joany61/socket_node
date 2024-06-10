@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc notif</title>
+    <!-- <link rel="stylesheet" href="./public/style.css"> -->
+    <script 
+     src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+     crossorigin="anonymous">
+    </script>
+
+</head>
+<body>
+    <div id="message-bar">
+        <p id="notification"></p>
+    </div>
+    <form action="" class="container">
+        <h2>Send Message with Socket.io</h2>
+        <textarea 
+         name="message" 
+         id="message"
+         placeholder="Enter message ..."
+         rows="5"
+         width="100%">
+        </textarea>
+        <button>SEND MESSAGE</button>
+    </form>
+    <script>
+        const notify = document.querySelector('#notification');
+        const message = document.querySelector('#message');
+        const button = document.querySelector('button');
+        const messageBar = document.querySelector('#message-bar');
+        function printMessage(e) {
+            e.preventDefault();
+            socket.emit('message', message.value)
+            message.value = ''
+        }
+
+        const socket = io()
+        socket.on('response', (data) => {
+            notify.textContent = data;
+            messageBar.style.backgroundColor = '#3F4E4F';
+            messageBar.style.height = '20vh';
+        });
+    </script>
+</body>
+</html>
