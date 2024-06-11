@@ -3,7 +3,6 @@ const app = require('./app')
 const { Server } = require('socket.io')
 const server = http.createServer(app)
 const dbCon = require('./services/dbConn')
-
 const https = require('https');
 var data_w = ''
 
@@ -51,7 +50,7 @@ io.on('connection', (socket) => {
     })
 })                                                                                                                                                  
 
-server.listen( process.env || 8080, () => {
+server.listen( process.env.PORT || 8080, () => {
 
     console.log('server')
 })
