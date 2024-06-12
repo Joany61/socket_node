@@ -4,15 +4,19 @@ USER root
 
 WORKDIR /app
 
-RUN chown -R node /app && chmod -R a-rwx /app
+RUN chown -R node /app
 
-USER node 
+COPY package.json .
 
-COPY package*json ./
+COPY package-lock.json .
 
 RUN npm install
 
 COPY . .
+
+RUN chmod a+rwx /app
+
+USER node
 
 EXPOSE 8080
 
