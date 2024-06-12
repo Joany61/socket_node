@@ -1,5 +1,19 @@
-FROM alpine:3.18
+FROM node:20-alpine
 
-ENV NODE_VERSION 18.19.1
+USER root 
 
-RUN adduser
+WORKDIR /app
+
+RUN chown -R node /app && chmod -R a-rwx /app
+
+USER node 
+
+COPY package*json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+
+CMD [ "npm", "start" ]
