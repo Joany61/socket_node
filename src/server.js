@@ -2,7 +2,7 @@ const http = require('http')
 const app = require('./app')
 const { Server } = require('socket.io')
 const server = http.createServer(app)
-const dbCon = require('./services/dbConn')
+const dbCon = require('./config/dbConn')
 const https = require('https');
 var data_w = ''
 

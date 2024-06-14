@@ -22,13 +22,19 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try{
         const { username, password } = req.body
+        const token = null
         const user = await User.findOne({ username })
         if (!user){
             return res.status(401).json({ error: 'Authentication failed' })
         }
-        const token = jwt.sign({userId: user._id}, process.env.SECRET_KEY || '004AZERTY' , {
-            expiresIn: '1h',
-        });
+        else if (bcrypt.compare(password, user.password)) {
+            token = jwt.sign({userId: user._id}, process.env.SECRET_KEY || '004AZERTY' , {
+                expiresIn: '1h',
+            });
+        }
+        else {
+            return res.status(401).json({message: 'Bad password'})
+        }
         res.status(200).json({ token })
     }
     catch(e){
