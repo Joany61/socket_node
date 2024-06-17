@@ -78,9 +78,6 @@ function calculateCost(start_time, end_time){
     const durationInHours = (end_time - start_time) / (1000 * 60 * 60)
     return hourly_rate = durationInHours
 }
-const cancelBooking = () => {
-
-}
 
 
 module.exports = { createBooking, getBookingByUser, getBookingById}
