@@ -1,3 +1,4 @@
+// all helper functions is here
 function getOffset(currentPage = 1, listPerPage) {
     return (currentPage - 1) * [listPerPage]
 }
