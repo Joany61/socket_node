@@ -1,9 +1,8 @@
 const mongoose = require('mongoose')
 
 const bookingSchema = new mongoose.Schema({
-    renter_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+    matricule: {
+        type: Array,
         required: true
     },
     parcking_place_id: {
@@ -32,6 +31,5 @@ const bookingSchema = new mongoose.Schema({
         default: 'pending'
     }
 })
-
 
 module.exports = mongoose.model('Booking', bookingSchema)

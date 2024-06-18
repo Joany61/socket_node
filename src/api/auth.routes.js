@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')                                                                                                                                                                                                                                
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
@@ -14,6 +14,7 @@ router.post('/register', async (req, res) => {
         res.status(201).json({ message: 'User registered successfully' })
     }
     catch(e){
+        console.log(JSON.stringify(req.body))
         res.status(500).json({ error: 'Registration failed '})
         console.log('error: ' + e)
     }
@@ -22,7 +23,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try{
         const { username, password } = req.body
-        const token = null
+        let token = null
         const user = await User.findOne({ username })
         if (!user){
             return res.status(401).json({ error: 'Authentication failed' })

@@ -1,4 +1,5 @@
 const Booking = require('../models/booking')
+const ParkingPlace = require('../models/parkingPlace')
 
 const createBooking = async (req, res) => {
     try {
@@ -80,4 +81,15 @@ function calculateCost(start_time, end_time){
 }
 
 
-module.exports = { createBooking, getBookingByUser, getBookingById}
+const getAllbooking = async (req, res) => {
+  try{
+    const booking = await Booking.find()
+    res.json(booking)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).json({message: 'Server error'})
+  }
+
+}
+module.exports = { createBooking, getBookingByUser, getBookingById, getAllbooking}

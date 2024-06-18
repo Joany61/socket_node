@@ -8,15 +8,17 @@ const bookingRoutes = require('./api/booking.routes')
 require('dotenv').config()
 const app = express()
 
+// utilisation des middleware
+app.use(express.json())
+app.use(express.static('./public'))
+app.use(express.urlencoded({
+    extended: true
+}))
+
 // ajout des routes
 app.use('/auth', authRoutes)
 app.use('/protected', protectedRoutes)
 app.use('/booking', bookingRoutes)
-
-// utilisation des middleware
-app.use(express.json())
-app.use(express.static('./public'))
-
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './index.html'))
